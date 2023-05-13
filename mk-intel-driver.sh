@@ -14,12 +14,16 @@ cd "$HOME/intel-driver"
 
 # LibVA
 echo "$(date "+%d.%m.%Y %T") INFO: *** Cloning libva git. ***"
-git clone "https://github.com/intel/libva.git"
+wget https://github.com/intel/libva/archive/refs/tags/2.18.0.zip
+sleep 5
+unzip 2.18.0.zip
+sleep 5
+rm -rf 2.18.0.zip
+sleep 5
+mv libva-2.18.0 libva
 sleep 5
 cd "$HOME/intel-driver/libva"
 echo "$(date "+%d.%m.%Y %T") INFO: *** Building and installing libva (VAAPI). ***"
-autoupdate
-sleep 5
 ./autogen.sh --prefix=/usr --libdir=/usr/lib/x86_64-linux-gnu
 sleep 5
 make -j8
@@ -36,7 +40,7 @@ cd "$HOME/intel-driver/gmmlib"
 echo "$(date "+%d.%m.%Y %T") INFO: *** Building and installing gmmlib ***"
 mkdir build && cd build
 sleep 5
-cmake -DCMAKE_BUILD_TYPE=ReleaseInternal -DCMAKE_INSTALL_PREFIX=/usr ../
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ../
 sleep 5
 make -j8
 sleep 5
@@ -52,7 +56,7 @@ mkdir build_media
 sleep 5
 cd "$HOME/intel-driver/build_media"
 echo "$(date "+%d.%m.%Y %T") INFO: *** Building media-driver. ***"
-cmake -DBUILD_TYPE=release-internal -DCMAKE_INSTALL_PREFIX=/usr ../media-driver
+cmake -DBUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr ../media-driver
 sleep 5
 make -j8
 sleep 5
