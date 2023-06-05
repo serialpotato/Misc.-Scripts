@@ -14,13 +14,7 @@ cd "$HOME/intel-driver"
 
 # LibVA
 echo "$(date "+%d.%m.%Y %T") INFO: *** Cloning libva git. ***"
-wget https://github.com/intel/libva/archive/refs/tags/2.18.0.zip
-sleep 5
-unzip 2.18.0.zip
-sleep 5
-rm -rf 2.18.0.zip
-sleep 5
-mv libva-2.18.0 libva
+git clone "https://github.com/intel/libva.git"
 sleep 5
 cd "$HOME/intel-driver/libva"
 echo "$(date "+%d.%m.%Y %T") INFO: *** Building and installing libva (VAAPI). ***"
